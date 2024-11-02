@@ -1,0 +1,36 @@
+{% include 'header.html' %}
+<br>
+<a href="{{ url_for('create') }}" class="btn btn-success">
+    Ingresar nuevo Empleado
+</a>
+<br><br>
+<h1 class="text-center">Pastelería</h1>
+<table class="table table-light">
+    <thead class="thead-light">
+        <tr>
+            <th>#</th>
+            <th>Foto</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for empleado in empleados %}
+        <tr>
+            <td>{{ empleado[0] }}
+            </td>
+            <td> 
+                <img class="img-thumbnail" width="100" src="{{ url_for('uploads', nombreFoto=empleado[3]) }}" alt="">
+            </td>
+            <td>{{ empleado[1] }}</td>
+            <td>{{ empleado[2] }}</td>
+            <td>
+                <a href="/edit/{{empleado[0]}}" class="btn btn-primary">Editar</a>
+                <a href="/destroy/{{empleado[0]}}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este empleado?');">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% include 'footer.html' %}
